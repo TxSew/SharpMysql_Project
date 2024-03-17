@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/thanh-ukpc/Desktop/learn/LearnDotNet/LearnDotNet.csproj": {}
+    "/home/thanh-ukpc/Desktop/learn/SharpMysql_Project/LearnDotNet.csproj": {}
   },
   "projects": {
-    "/home/thanh-ukpc/Desktop/learn/LearnDotNet/LearnDotNet.csproj": {
+    "/home/thanh-ukpc/Desktop/learn/SharpMysql_Project/LearnDotNet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/thanh-ukpc/Desktop/learn/LearnDotNet/LearnDotNet.csproj",
+        "projectUniqueName": "/home/thanh-ukpc/Desktop/learn/SharpMysql_Project/LearnDotNet.csproj",
         "projectName": "LearnDotNet",
-        "projectPath": "/home/thanh-ukpc/Desktop/learn/LearnDotNet/LearnDotNet.csproj",
+        "projectPath": "/home/thanh-ukpc/Desktop/learn/SharpMysql_Project/LearnDotNet.csproj",
         "packagesPath": "/home/thanh-ukpc/.nuget/packages/",
-        "outputPath": "/home/thanh-ukpc/Desktop/learn/LearnDotNet/obj/",
+        "outputPath": "/home/thanh-ukpc/Desktop/learn/SharpMysql_Project/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/thanh-ukpc/.nuget/NuGet/NuGet.Config"
@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
             "MySql.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"

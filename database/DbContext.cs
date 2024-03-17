@@ -10,5 +10,6 @@ namespace YourProjectName.Data
         }
 
         public DbSet<db_products> db_products { get; set; }
+        public DbSet<db_products> db_category { get; set; }
     }
 }

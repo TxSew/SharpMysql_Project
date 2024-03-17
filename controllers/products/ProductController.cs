@@ -2,19 +2,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YourProjectName.Data;
 using YourProjectName.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Threading.Tasks;
+using OfficeOpenXml;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using rf;
 
 namespace YourProjectName.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CSharpCornerArticlesController : ControllerBase
+    public class ProductController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public CSharpCornerArticlesController(ApplicationDbContext context)
+        public ProductController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -25,20 +27,26 @@ namespace YourProjectName.Controllers
             var groupedProducts = await _context.db_products
            .ToListAsync();
 
+
             return groupedProducts;
 
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<db_products>> GetActionResultAsync(int id)
+        [HttpGet("getOne")]
+        public async Task<ActionResult<object>> GetActionResultAsync()
         {
 
-            var context = await _context.db_products.Where(x => x.id == id).FirstAsync();
-            return context;
+            var context = await _context.db_products.Join(_context.db_category, p => p.categoryId, c => c.id, (c, p) => new { db_products = p, db_category = c }).FirstOrDefaultAsync();
+            Console.WriteLine("hello");
+            if (context == null)
+            {
+                return NoContent();
+            }
+            return Ok(context);
         }
 
         [HttpPost]
-        public async Task<ActionResult<db_products>> PostCSharpCornerArticle(db_products article)
+        public async Task<ActionResult<object>> PostCSharpCornerArticle([FromBody] db_products article)
         {
             _context.db_products.Add(article);
             await _context.SaveChangesAsync();
@@ -46,7 +54,7 @@ namespace YourProjectName.Controllers
             return CreatedAtAction("GetCSharpCornerArticles", new { id = article.id }, article);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("update")]
         public async Task<IActionResult> PutCSharpCornerArticle(int id, db_products article)
         {
 
@@ -71,7 +79,7 @@ namespace YourProjectName.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteCSharpCornerArticle(int id)
         {
             var article = await _context.db_products.FindAsync(id);
