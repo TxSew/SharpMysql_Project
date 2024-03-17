@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using rf;
 using YourProjectName.Models;
 
 namespace YourProjectName.Data
@@ -10,6 +11,6 @@ namespace YourProjectName.Data
         }
 
         public DbSet<db_products> db_products { get; set; }
-        public DbSet<db_products> db_category { get; set; }
+        public DbSet<db_category> db_category { get; set; }
     }
 }

@@ -33,11 +33,18 @@ namespace YourProjectName.Controllers
         }
 
         [HttpGet("getOne")]
-        public async Task<ActionResult<object>> GetActionResultAsync()
+        public async Task<ActionResult<object>> GetActionResultAsync([FromBody] object props)
         {
+            Console.Write(props);
+            var context = await _context.db_products
+            .Join(
+                _context.db_category,
+                p => p.categoryId,
+                c => c.id,
+                (product, category) => new { category = new { category.image, category.name, product } }
+            )
+            .ToListAsync(); // Convert to list
 
-            var context = await _context.db_products.Join(_context.db_category, p => p.categoryId, c => c.id, (c, p) => new { db_products = p, db_category = c }).FirstOrDefaultAsync();
-            Console.WriteLine("hello");
             if (context == null)
             {
                 return NoContent();
